@@ -42,7 +42,7 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 
 	format := getopt("SYSLOG_FORMAT", "rfc5424")
 	priority := getopt("SYSLOG_PRIORITY", "{{.Priority}}")
-	tag := getopt("SYSLOG_TAG", "{{.Container.Config.Hostname}}")
+	tag := getopt("SYSLOG_TAG", "{{.Container.Config.Hostname}}: ")
 	pid := getopt("SYSLOG_PID", "{{.Container.State.Pid}}")
 	hostname := getopt("SYSLOG_HOSTNAME", "{{.ContainerName}}"+route.Options["append_tag"])
 	structuredData := getopt("SYSLOG_STRUCTURED_DATA", "")
@@ -54,7 +54,7 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 	var tmplStr string
 	switch format {
 	case "rfc5424":
-		tmplStr = fmt.Sprintf("<%s>1 {{.Timestamp}} %s %s: %s - docker: [%s] %s\n",
+		tmplStr = fmt.Sprintf("<%s>1 {{.Timestamp}} %s %s %s docker: - [%s] %s\n",
 			priority, hostname, tag, pid, structuredData, data)
 	case "rfc3164":
 		tmplStr = fmt.Sprintf("<%s>{{.Timestamp}} %s %s[%s] docker: %s\n",
