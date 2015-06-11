@@ -54,10 +54,10 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 	var tmplStr string
 	switch format {
 	case "rfc5424":
-		tmplStr = fmt.Sprintf("<%s>1 {{.Timestamp}} %s %s %s: - [%s] %s\n",
+		tmplStr = fmt.Sprintf("<%s>1 {{.Timestamp}} %s %s %s - docker: [%s] %s\n",
 			priority, hostname, tag, pid, structuredData, data)
 	case "rfc3164":
-		tmplStr = fmt.Sprintf("<%s>{{.Timestamp}} %s %s[%s]: %s\n",
+		tmplStr = fmt.Sprintf("<%s>{{.Timestamp}} %s %s[%s] docker: %s\n",
 			priority, hostname, tag, pid, data)
 	default:
 		return nil, errors.New("unsupported syslog format: " + format)
