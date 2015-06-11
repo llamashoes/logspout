@@ -1,5 +1,7 @@
 # logspout
 
+Forked from gliderlabs/logspout: I wanted to change the way tags were sent as well as the containers hostname. This works better in a kubernetes environment. 
+
 > Docker Hub automated builds for `gliderlabs/logspout:latest` and `progrium/logspout:latest` are now pointing to the `release` branch. For `master`, use `gliderlabs/logspout:master`. Individual versions are also available as saved images in [releases](https://github.com/gliderlabs/logspout/releases).
 
 Logspout is a log router for Docker containers that runs inside Docker. It attaches to all containers on a host, then routes their logs wherever you want. It also has an extensible module system.
