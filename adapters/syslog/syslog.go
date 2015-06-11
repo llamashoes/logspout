@@ -42,9 +42,9 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 
 	format := getopt("SYSLOG_FORMAT", "rfc5424")
 	priority := getopt("SYSLOG_PRIORITY", "{{.Priority}}")
-	hostname := getopt("SYSLOG_HOSTNAME", "{{.Container.Config.Hostname}}")
+	tag := getopt("SYSLOG_TAG", "{{.Container.Config.Hostname}}")
 	pid := getopt("SYSLOG_PID", "{{.Container.State.Pid}}")
-	tag := getopt("SYSLOG_TAG", "{{.ContainerName}}"+route.Options["append_tag"])
+	hostname := getopt("SYSLOG_HOSTNAME", "{{.ContainerName}}"+route.Options["append_tag"])
 	structuredData := getopt("SYSLOG_STRUCTURED_DATA", "")
 	if route.Options["structured_data"] != "" {
 		structuredData = route.Options["structured_data"]
